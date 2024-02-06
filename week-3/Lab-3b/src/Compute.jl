@@ -13,8 +13,8 @@ This is a `non-mutating` function.
 ### More information
 * Algorithm: https://en.wikipedia.org/wiki/Bubble_sort
 """
-function bubble_sort(array::Array{T,1}; 
-    sounds::Union{Nothing, Dict{Int64, Tuple{Matrix{Float64}, Float32}}} = nothing)::Array{T,1} where T <: Number
+function bubble_sort(array::Array{T,1};
+    sounds::Union{Nothing,Dict{Int64,Tuple{Matrix{Float64},Float32}}}=nothing)::Array{T,1} where {T<:Number}
 
     # initialize -
     arr = copy(array) # make a copy of the array
@@ -27,12 +27,15 @@ function bubble_sort(array::Array{T,1};
             @show i, arr
             _play_sound(arr; sounds=sounds)
         end
-        
+
         for j ∈ 1:N-i
             if arr[j] > arr[j+1]
 
                 # TODO: swap that values at j and j+1
                 # ...
+                x = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = x
 
             end
         end
@@ -57,8 +60,8 @@ This is a `mutating` function.
 ### More information
 * Algorithm: https://en.wikipedia.org/wiki/Bubble_sort
 """
-function bubble_sort!(array::Array{T,1}; 
-    sounds::Union{Nothing, Dict{Int64, Tuple{Matrix{Float64}, Float32}}} = nothing)::Array{T,1} where T <: Number
+function bubble_sort!(array::Array{T,1};
+    sounds::Union{Nothing,Dict{Int64,Tuple{Matrix{Float64},Float32}}}=nothing)::Array{T,1} where {T<:Number}
 
     # initialize -
     arr = array # do nothing, just use the array directly
@@ -77,7 +80,9 @@ function bubble_sort!(array::Array{T,1};
 
                 # TODO: swap that values at j and j+1
                 # ...
-
+                x = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = x
             end
         end
     end
